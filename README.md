@@ -42,7 +42,7 @@ Our system is composed of four distinct, specialized agents that collaborate to 
 * **Job:** This is our **"Agent-as-a-Judge"**. After the Dev Agent applies a fix, this agent autonomously re-runs the *entire* validation process (read HTML, find selector, inspect CSS) to verify the fix. It then returns a final **`PASS`** or **`FAIL`** judgment.
 
 ```mermaid
-graph TD subgraph "Agentic-Evolver System"
+graph TD
     A[User] -- "Bug Report (e.g., 'blue button')" --> B(Triage Agent)
 
     subgraph "1. VALIDATE"
@@ -68,7 +68,6 @@ graph TD subgraph "Agentic-Evolver System"
     end
 
     B -- "Final Report" --> A
-end
 ```
 ---
 
