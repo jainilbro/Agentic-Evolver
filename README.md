@@ -18,34 +18,6 @@ The core concept is to build an autonomous "AgentOps" team that can:
 This architecture demonstrates a **Level 3: Collaborative Multi-Agent System** that is robust, observable, and built to "evolve"—which is the core of production-ready agentic design.
 
 ---
-graph TD
-    subgraph "Agentic-Evolver System"
-        A[User] -- "Bug Report (e.g., 'blue button')" --> B(Triage Agent)
-
-        subgraph "1. VALIDATE"
-            B -- "Call 1" --> C(Bug-Hunter Agent)
-            C -- "1a. read_html_file()" --> W[(world/index.html)]
-            C -- "1b. inspect_element_color()" --> S[(world/style.css)]
-            C -- "VALIDATED" --> B
-        end
-
-        subgraph "2. FIX"
-            B -- "Call 2" --> D(Dev Agent)
-            D -- "2a. get_current_css_code()" --> S
-            D -- "2b. apply_css_fix()" --> S
-            D -- "2c. save_fix_to_memory()" --> M[(memory/procedural_memory.json)]
-            D -- "FIX APPLIED" --> B
-        end
-
-        subgraph "3. VERIFY (Agent-as-a-Judge)"
-             B -- "Call 3" --> E(QA Agent)
-             E -- "3a. read_html_file()" --> W
-             E -- "3b. verify_element_color()" --> S
-             E -- "'PASS'" --> B
-        end
-
-        B -- "Final Report" --> A
-    end
 ## 2. The Architecture: A 4-Agent "AgentOps" Team
 
 Our system is composed of four distinct, specialized agents that collaborate to solve a problem.
@@ -69,6 +41,35 @@ Our system is composed of four distinct, specialized agents that collaborate to 
 * **Model:** `gemini-2.0-flash-lite`
 * **Job:** This is our **"Agent-as-a-Judge"**. After the Dev Agent applies a fix, this agent autonomously re-runs the *entire* validation process (read HTML, find selector, inspect CSS) to verify the fix. It then returns a final **`PASS`** or **`FAIL`** judgment.
 
+```mermaid
+graph TD subgraph "Agentic-Evolver System"
+    A[User] -- "Bug Report (e.g., 'blue button')" --> B(Triage Agent)
+
+    subgraph "1. VALIDATE"
+        B -- "Call 1" --> C(Bug-Hunter Agent)
+        C -- "1a. read_html_file()" --> W[(world/index.html)]
+        C -- "1b. inspect_element_color()" --> S[(world/style.css)]
+        C -- "VALIDATED" --> B
+    end
+
+    subgraph "2. FIX"
+        B -- "Call 2" --> D(Dev Agent)
+        D -- "2a. get_current_css_code()" --> S
+        D -- "2b. apply_css_fix()" --> S
+        D -- "2c. save_fix_to_memory()" --> M[(memory/procedural_memory.json)]
+        D -- "FIX APPLIED" --> B
+    end
+
+    subgraph "3. VERIFY (Agent-as-a-Judge)"
+         B -- "Call 3" --> E(QA Agent)
+         E -- "3a. read_html_file()" --> W
+         E -- "3b. verify_element_color()" --> S
+         E -- "'PASS'" --> B
+    end
+
+    B -- "Final Report" --> A
+end
+```
 ---
 
 ## 3. Showcasing the 5-Day Course Concepts
