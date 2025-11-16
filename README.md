@@ -42,32 +42,34 @@ Our system is composed of four distinct, specialized agents that collaborate to 
 * **Job:** This is our **"Agent-as-a-Judge"**. After the Dev Agent applies a fix, this agent autonomously re-runs the *entire* validation process (read HTML, find selector, inspect CSS) to verify the fix. It then returns a final **`PASS`** or **`FAIL`** judgment.
 
 ```mermaid
-graph TD
-    A[User] -- "Bug Report (e.g., 'blue button')" --> B(Triage Agent)
-
-    subgraph "1. VALIDATE"
-        B -- "Call 1" --> C(Bug-Hunter Agent)
-        C -- "1a. read_html_file()" --> W[(world/index.html)]
-        C -- "1b. inspect_element_color()" --> S[(world/style.css)]
-        C -- "VALIDATED" --> B
-    end
-
-    subgraph "2. FIX"
-        B -- "Call 2" --> D(Dev Agent)
-        D -- "2a. get_current_css_code()" --> S
-        D -- "2b. apply_css_fix()" --> S
-        D -- "2c. save_fix_to_memory()" --> M[(memory/procedural_memory.json)]
-        D -- "FIX APPLIED" --> B
-    end
-
-    subgraph "3. VERIFY (Agent-as-a-Judge)"
-         B -- "Call 3" --> E(QA Agent)
-         E -- "3a. read_html_file()" --> W
-         E -- "3b. verify_element_color()" --> S
-         E -- "'PASS'" --> B
-    end
-
+graph TB
+    A[User] -- "Bug Report" --> B(Triage Agent)
     B -- "Final Report" --> A
+
+    subgraph "Step 1: VALIDATE"
+        direction LR
+        B -- "Call 1" --> C(Bug-Hunter Agent)
+        C -- "VALIDATED" --> B
+        C -- "1a. read_html_file()" --> F1[index.html]
+        C -- "1b. inspect_element_color()" --> F2[style.css]
+    end
+
+    subgraph "Step 2: FIX"
+        direction LR
+        B -- "Call 2" --> D(Dev Agent)
+        D -- "FIX APPLIED" --> B
+        D -- "2a. get_current_css_code()" --> F2
+        D -- "2b. apply_css_fix()" --> F2
+        D -- "2c. save_fix_to_memory()" --> F3[memory.json]
+    end
+
+    subgraph "Step 3: VERIFY (Agent-as-a-Judge)"
+        direction LR
+         B -- "Call 3" --> E(QA Agent)
+         E -- "'PASS'" --> B
+         E -- "3a. read_html_file()" --> F1
+         E -- "3b. verify_element_color()" --> F2
+    end
 ```
 ---
 
