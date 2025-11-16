@@ -90,7 +90,7 @@ This project was built to directly implement the core concepts from each day of 
 
 ## 4. Bonus Points
 
-* **⭐ Effective Use of Gemini (5 points):** Yes. **All four** of agents are powered by the Gemini family of models (`gemini-2.0-flash` and `gemini-2.0-flash-lite`), demonstrating a "team of specialists" approach.
+* **⭐ Effective Use of Gemini:** Yes. **All four** of agents are powered by the Gemini family of models (`gemini-2.0-flash` and `gemini-2.0-flash-lite`), demonstrating a "team of specialists" approach.
 
 ---
 
