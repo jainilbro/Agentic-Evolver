@@ -42,33 +42,29 @@ Our system is composed of four distinct, specialized agents that collaborate to 
 * **Job:** This is our **"Agent-as-a-Judge"**. After the Dev Agent applies a fix, this agent autonomously re-runs the *entire* validation process (read HTML, find selector, inspect CSS) to verify the fix. It then returns a final **`PASS`** or **`FAIL`** judgment.
 
 ```mermaid
-graph TB
+graph TD
     A[User] -- "Bug Report" --> B(Triage Agent)
     B -- "Final Report" --> A
 
     subgraph "Step 1: VALIDATE"
-        direction LR
-        B -- "Call 1" --> C(Bug-Hunter Agent)
-        C -- "VALIDATED" --> B
-        C -- "1a. read_html_file()" --> F1[index.html]
-        C -- "1b. inspect_element_color()" --> F2[style.css]
+        B -- "1. Calls" --> C(Bug-Hunter Agent)
+        C -- "Uses Tools" --> C_Tools((read_html_file, inspect_element_color))
+        C_Tools -- "Read" --> F1[world/index.html]
+        C_Tools -- "Read" --> F2[world/style.css]
     end
 
     subgraph "Step 2: FIX"
-        direction LR
-        B -- "Call 2" --> D(Dev Agent)
-        D -- "FIX APPLIED" --> B
-        D -- "2a. get_current_css_code()" --> F2
-        D -- "2b. apply_css_fix()" --> F2
-        D -- "2c. save_fix_to_memory()" --> F3[memory.json]
+        B -- "2. Calls" --> D(Dev Agent)
+        D -- "Uses Tools" --> D_Tools((get_current_css_code, apply_css_fix, save_fix_to_memory))
+        D_Tools -- "Read/Write" --> F2
+        D_Tools -- "Write" --> F3[memory/procedural_memory.json]
     end
 
     subgraph "Step 3: VERIFY (Agent-as-a-Judge)"
-        direction LR
-         B -- "Call 3" --> E(QA Agent)
-         E -- "'PASS'" --> B
-         E -- "3a. read_html_file()" --> F1
-         E -- "3b. verify_element_color()" --> F2
+        B -- "3. Calls" --> E(QA Agent)
+        E -- "Uses Tools" --> E_Tools((read_html_file, verify_element_color))
+        E_Tools -- "Read" --> F1
+        E_Tools -- "Read" --> F2
     end
 ```
 ---
