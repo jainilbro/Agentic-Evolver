@@ -47,24 +47,27 @@ graph TD
     B -- "Final Report" --> A
 
     subgraph "Step 1: VALIDATE"
+        direction LR
         B -- "1. Calls" --> C(Bug-Hunter Agent)
-        C -- "Uses Tools" --> C_Tools((read_html_file, inspect_element_color))
-        C_Tools -- "Read" --> F1[world/index.html]
-        C_Tools -- "Read" --> F2[world/style.css]
+        C -- "Uses Tools" --> C_Tools(("1. read_html_file()<br/>2. inspect_element_color()"))
+        C_Tools -- "Read" --> F1[index.html]
+        C_Tools -- "Read" --> F2[style.css]
     end
 
     subgraph "Step 2: FIX"
+        direction LR
         B -- "2. Calls" --> D(Dev Agent)
-        D -- "Uses Tools" --> D_Tools((get_current_css_code, apply_css_fix, save_fix_to_memory))
+        D -- "Uses Tools" --> D_Tools(("1. get_current_css_code()<br/>2. apply_css_fix()<br/>3. save_fix_to_memory()"))
         D_Tools -- "Read/Write" --> F2
-        D_Tools -- "Write" --> F3[memory/procedural_memory.json]
+        D_Tools -- "Write" --> F3[memory.json]
     end
 
     subgraph "Step 3: VERIFY (Agent-as-a-Judge)"
-        B -- "3. Calls" --> E(QA Agent)
-        E -- "Uses Tools" --> E_Tools((read_html_file, verify_element_color))
-        E_Tools -- "Read" --> F1
-        E_Tools -- "Read" --> F2
+        direction LR
+         B -- "3. Calls" --> E(QA Agent)
+         E -- "Uses Tools" --> E_Tools(("1. read_html_file()<br/>2. verify_element_color()"))
+         E_Tools -- "Read" --> F1
+         E_Tools -- "Read" --> F2
     end
 ```
 ---
