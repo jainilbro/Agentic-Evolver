@@ -20,7 +20,7 @@ This architecture demonstrates a **Level 3: Collaborative Multi-Agent System** t
 ---
 ## 2. The Architecture: A 4-Agent "AgentOps" Team
 
-Our system is composed of four distinct, specialized agents that collaborate to solve a problem.
+System is composed of four distinct, specialized agents that collaborate to solve a problem.
 
 ### 1. The "Triage" Agent (The Manager)
 * **Model:** `gemini-2.0-flash`
@@ -76,21 +76,21 @@ graph TD
 
 This project was built to directly implement the core concepts from each day of the course.
 
-* **✅ 1. Multi-Agent Architecture (Day 1):** We built a "Coordinator" (Triage) that manages a "team of specialists" (Bug-Hunter, Dev, QA). This is a robust, scalable pattern far superior to a single "do-it-all" agent.
+* **✅ 1. Multi-Agent Architecture (Day 1):** Built a "Coordinator" (Triage) that manages a "team of specialists" (Bug-Hunter, Dev, QA). This is a robust, scalable pattern far superior to a single "do-it-all" agent.
 
-* **✅ 2. Specialized Tools & Autonomous Reasoning (Day 2):** We demonstrated true agent autonomy. Our "v1" Bug-Hunter agent was "blind" and had to *ask* for the CSS selector. We "evolved" it into a "v2" agent by giving it a new tool (`read_html_file`) and a smarter prompt, allowing it to *find* the selector on its own.
+* **✅ 2. Specialized Tools & Autonomous Reasoning (Day 2):** Demonstrated true agent autonomy. Our "v1" Bug-Hunter agent was "blind" and had to *ask* for the CSS selector. We "evolved" it into a "v2" agent by giving it a new tool (`read_html_file`) and a smarter prompt, allowing it to *find* the selector on its own.
 
-* **✅ 3. Procedural Memory (Day 3):** Our Dev Agent doesn't just fix a bug; it *learns* from it. After a successful fix, it writes the solution to `memory/procedural_memory.json`. This is "Procedural Memory" (how-to knowledge), a core concept for building agents that improve over time.
+* **✅ 3. Procedural Memory (Day 3):** Dev Agent doesn't just fix a bug; it *learns* from it. After a successful fix, it writes the solution to `memory/procedural_memory.json`. This is "Procedural Memory" (how-to knowledge), a core concept for building agents that improve over time.
 
-* **✅ 4. Agent-as-a-Judge & Observability (Day 4):** Our QA Agent acts as an "Agent-as-a-Judge," autonomously evaluating the work of the Dev Agent. The entire system is built to be "observable"; the `verbose=True` logs in the terminal are our **Observability Trace**, which we used to find and fix all our reasoning bugs.
+* **✅ 4. Agent-as-a-Judge & Observability (Day 4):** QA Agent acts as an "Agent-as-a-Judge," autonomously evaluating the work of the Dev Agent. The entire system is built to be "observable"; the `verbose=True` logs in the terminal are our **Observability Trace**, which we used to find and fix all our reasoning bugs.
 
-* **✅ 5. AgentOps & Evolution (Day 5):** Our entire development process *was* the "AgentOps" loop. We used our Observability Traces to **Observe** logical failures (like the agent getting confused) and **Evolved** their prompts (their "brains") to make them more robust and reliable.
+* **✅ 5. AgentOps & Evolution (Day 5):** Entire development process *was* the "AgentOps" loop. We used our Observability Traces to **Observe** logical failures (like the agent getting confused) and **Evolved** their prompts (their "brains") to make them more robust and reliable.
 
 ---
 
 ## 4. Bonus Points
 
-* **⭐ Effective Use of Gemini (5 points):** Yes. **All four** of our agents are powered by the Gemini family of models (`gemini-2.0-flash` and `gemini-2.0-flash-lite`), demonstrating a "team of specialists" approach.
+* **⭐ Effective Use of Gemini (5 points):** Yes. **All four** of agents are powered by the Gemini family of models (`gemini-2.0-flash` and `gemini-2.0-flash-lite`), demonstrating a "team of specialists" approach.
 
 ---
 
