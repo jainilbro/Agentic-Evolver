@@ -139,12 +139,13 @@ pip install -r requirements.txt
     GOOGLE_API_KEY=YOUR_API_KEY_HERE
     ```
 
-### Step 5: Reset Project State (Important\!)
+### Step 5: Reset the Environment (Optional)
+We have included a DevOps utility script to instantly reset the project to its default "buggy" state. This allows you to run the demo multiple times easily.
 
-Before running for the first time, make sure the project is in its "buggy" state:
-
-1.  Open `world/style.css` and ensure the `background-color` is blue (`#007bff`).
-2.  Open `memory/procedural_memory.json` and ensure it contains only `[]` (an empty list).
+Run this command to restore the blue button and clear the agent's memory:
+```bash
+python reset.py
+```
 
 -----
 
